@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
     public Color defaultColor;
     public Color nightColor;
 
+    public GameObject explosion;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +50,12 @@ public class PlayerMovement : MonoBehaviour
         lastR = true;
         lastL = false;
         inactive = true;
-        
+
+        if (GameManager.instance.sceneID == 0)
+        {
+            sprite.color = nightColor;
+        }
+
     }
 
     void Update()
@@ -119,6 +126,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Z)))
             {
+                Instantiate(explosion, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
                 switch (jumpCounter)
                 {
                     case 0:
@@ -153,6 +161,7 @@ public class PlayerMovement : MonoBehaviour
         if (burst)
         {
             vel.y = burstVel;
+            Instantiate(explosion, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
             burst = false;
             canBurst = false;
         }
