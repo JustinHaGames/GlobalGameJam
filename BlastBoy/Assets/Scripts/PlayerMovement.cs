@@ -69,6 +69,11 @@ public class PlayerMovement : MonoBehaviour
             sprite.color = defaultColor;
         }
 
+        if (GameManager.instance.sceneID == 2)
+        {
+            sprite.color = defaultColor;
+        }
+
     }
 
     void Update()

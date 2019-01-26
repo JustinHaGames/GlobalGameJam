@@ -30,6 +30,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
+        if (sceneID == 1)
+        {
+            blastOff = true;
+        }
+
         if (blastOff)
         {
             if (!audio.isPlaying)

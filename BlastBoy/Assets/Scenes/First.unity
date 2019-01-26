@@ -1078,5 +1078,10 @@ PrefabInstance:
       propertyPath: blastOffSound
       value: 
       objectReference: {fileID: 8300000, guid: e75e0a232d6744125af42288466f4431, type: 3}
+    - target: {fileID: 3923841244765199937, guid: c64e435f09a7742abb0120d3b6d94a24,
+        type: 3}
+      propertyPath: sceneID
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c64e435f09a7742abb0120d3b6d94a24, type: 3}
