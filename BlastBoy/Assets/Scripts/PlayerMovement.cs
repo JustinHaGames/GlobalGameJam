@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     BoxCollider2D box;
     SpriteRenderer sprite;
+    AudioSource audio;
 
     Animator anim;
 
@@ -33,11 +34,17 @@ public class PlayerMovement : MonoBehaviour
     bool canBurst;
     bool burst;
     public float burstVel;
+    int burstCounter;
+    bool superBurst;
 
     public Color defaultColor;
     public Color nightColor;
+    public Color flashing;
 
     public GameObject explosion;
+
+    public AudioClip firstBurst;
+    public AudioClip secondBurst;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
         box = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        audio = GetComponent<AudioSource>();
 
         lastR = true;
         lastL = false;
@@ -101,7 +109,10 @@ public class PlayerMovement : MonoBehaviour
             lastL = false;
             lastR = true; 
             sprite.flipX = false;
-            anim.Play("RunningAnimation");
+            if (grounded)
+            {
+                anim.Play("RunningAnimation");
+            }
         }
 
         if (left)
@@ -110,10 +121,13 @@ public class PlayerMovement : MonoBehaviour
             lastL = true;
             lastR = false;
             sprite.flipX = true;
-            anim.Play("RunningAnimation");
+            if (grounded)
+            {
+                anim.Play("RunningAnimation");
+            }
         }
 
-        if (!left && !right)
+        if (!left && !right && grounded)
         {
             vel.x = 0;
             anim.Play("Idle");
@@ -126,10 +140,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Z)))
             {
-                Instantiate(explosion, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
                 switch (jumpCounter)
                 {
                     case 0:
+                        anim.Play("Jump");
+                        audio.PlayOneShot(firstBurst, 1f);
+                        Instantiate(explosion, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
                         break;
                     case 1:
                         jumpVel += 1;
@@ -161,6 +177,9 @@ public class PlayerMovement : MonoBehaviour
         if (burst)
         {
             vel.y = burstVel;
+            anim.Play("Jump");
+            audio.PlayOneShot(secondBurst, 1f);
+            burstCounter += 1;
             Instantiate(explosion, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
             burst = false;
             canBurst = false;
