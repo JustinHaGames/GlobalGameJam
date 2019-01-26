@@ -1,9 +1,12 @@
 fileFormatVersion: 2
-guid: 067dc74dcc1b74842937984b53428cc2
+guid: 942c867aa5bb84b41bbc8a788131853f
 TextureImporter:
   fileIDToRecycleName:
-    21300000: House-export_0
-    21300002: House-export_1
+    21300000: NegativeBurstEffect_0
+    21300002: NegativeBurstEffect_1
+    21300004: NegativeBurstEffect_2
+    21300006: NegativeBurstEffect_3
+    21300008: NegativeBurstEffect_4
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -119,13 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: House-export_0
+      name: NegativeBurstEffect_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 640
-        height: 640
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,19 +136,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 555d2c19b1eb24624a82faf832fc28a2
+      spriteID: dc94431d94755442fb09d2b6509b79f2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House-export_1
+      name: NegativeBurstEffect_1
       rect:
         serializedVersion: 2
-        x: 640
+        x: 32
         y: 0
-        width: 640
-        height: 640
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,7 +156,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22e060bdac747466ba7d262a7d3b33df
+      spriteID: c1f8f0cdf54b446738e5d68ae05031cb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NegativeBurstEffect_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0e0e7c6eb9e046469aaaf6e1d97d4dc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NegativeBurstEffect_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41f370069fe4946d2b41ad708258c5b6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NegativeBurstEffect_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4ae5202fe7c442e3b315bb57aae78b6
       vertices: []
       indices: 
       edges: []
@@ -161,7 +224,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 4a297992798694e17a6c67f0f2263eaa
+    spriteID: 84491f8555c9a4aa08732d2e39a9a2fb
     vertices: []
     indices: 
     edges: []

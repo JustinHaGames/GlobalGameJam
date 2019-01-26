@@ -16,8 +16,6 @@ public class PlayerMovement : MonoBehaviour
 
     bool grounded;
 
-    bool inactive;
-
     public float accel;
     public float maxAccel;
 
@@ -36,13 +34,16 @@ public class PlayerMovement : MonoBehaviour
     public float burstVel;
     int burstCounter;
     bool superBurst;
+    public float superBurstVel;
 
     public Color defaultColor;
     public Color nightColor;
-    public Color flashing;
+    public Color flashingColor;
+    float flashingTimer;
 
     public GameObject explosion;
 
+    bool discoverBurst;
     public AudioClip firstBurst;
     public AudioClip secondBurst;
 
@@ -57,11 +58,15 @@ public class PlayerMovement : MonoBehaviour
 
         lastR = true;
         lastL = false;
-        inactive = true;
 
         if (GameManager.instance.sceneID == 0)
         {
             sprite.color = nightColor;
+        }
+
+        if (GameManager.instance.sceneID == 1)
+        {
+            sprite.color = defaultColor;
         }
 
     }
@@ -144,7 +149,10 @@ public class PlayerMovement : MonoBehaviour
                 {
                     case 0:
                         anim.Play("Jump");
-                        audio.PlayOneShot(firstBurst, 1f);
+                        if (!GameManager.instance.blastOff)
+                        {
+                            audio.PlayOneShot(firstBurst, 1f);
+                        }
                         Instantiate(explosion, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
                         break;
                     case 1:
@@ -178,11 +186,61 @@ public class PlayerMovement : MonoBehaviour
         {
             vel.y = burstVel;
             anim.Play("Jump");
-            audio.PlayOneShot(secondBurst, 1f);
+            if (!GameManager.instance.blastOff)
+            {
+                audio.PlayOneShot(secondBurst, 1f);
+            }
             burstCounter += 1;
             Instantiate(explosion, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
             burst = false;
             canBurst = false;
+        }
+
+        if (GameManager.instance.sceneID == 0)
+        {
+            if (burstCounter == 0)
+            {
+                if (vel.y < 0)
+                {
+                    Time.timeScale = .5f;
+                }
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
+            if (burstCounter >= 3)
+            {
+                superBurst = true;
+            }
+        }
+
+        if (superBurst)
+        {
+            flashingTimer += 1 * Time.deltaTime;
+            if (flashingTimer <= .5f)
+            {
+                sprite.color = flashingColor;
+            }
+            else if (flashingTimer > .5f && flashingTimer < 1f)
+            {
+                sprite.color = nightColor;
+            }
+            else if (flashingTimer >= 1f)
+            {
+                flashingTimer = 0;
+            }
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Z))
+            {
+                vel.y = superBurstVel;
+                GameManager.instance.blastOff = true;
+                superBurst = false;
+            }
+        }
+
+        if (GameManager.instance.blastOff == true)
+        {
+            vel.x = 0f;
         }
 
         rb.MovePosition((Vector2)transform.position + vel * Time.deltaTime);

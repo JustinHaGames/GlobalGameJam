@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2986564537644836748}
   - component: {fileID: 2986564537644836750}
   - component: {fileID: 2986564537644836751}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -103,9 +103,10 @@ MonoBehaviour:
   jumpVel: 5
   maxJumpVel: 8
   burstVel: 10
+  superBurstVel: 10000
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   nightColor: {r: 0.4862745, g: 0.47843137, b: 0.8117647, a: 1}
-  flashing: {r: 0, g: 0, b: 0, a: 0}
+  flashingColor: {r: 0.9876151, g: 1, b: 0, a: 1}
   explosion: {fileID: 1900932734589038639, guid: cc867acb7d947444bacc2d37d79b400d,
     type: 3}
   firstBurst: {fileID: 8300000, guid: 978d7e8492f3a4ad897413d3d54ff0f9, type: 3}

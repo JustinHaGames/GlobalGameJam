@@ -1,9 +1,12 @@
 fileFormatVersion: 2
-guid: 067dc74dcc1b74842937984b53428cc2
+guid: 83f8f4818666d433b9c9e017649021b1
 TextureImporter:
   fileIDToRecycleName:
-    21300000: House-export_0
-    21300002: House-export_1
+    21300000: BubbleBoyNegative-export_0
+    21300002: BubbleBoyNegative-export_1
+    21300004: BubbleBoyNegative-export_2
+    21300006: BubbleBoyNegative-export_3
+    21300008: BubbleBoyNegative-export_4
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -119,13 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: House-export_0
+      name: BubbleBoyNegative-export_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 640
-        height: 640
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,19 +136,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 555d2c19b1eb24624a82faf832fc28a2
+      spriteID: b0f5118a1f84b44fcb72e3f9dc6287d0
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House-export_1
+      name: BubbleBoyNegative-export_1
       rect:
         serializedVersion: 2
-        x: 640
+        x: 256
         y: 0
-        width: 640
-        height: 640
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,7 +156,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22e060bdac747466ba7d262a7d3b33df
+      spriteID: 0dd937b8ae165459ea4857f15026fb59
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BubbleBoyNegative-export_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4675c083f33d4188939b71d37deccc8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BubbleBoyNegative-export_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52eca94a65eb94d4790b8b5fbbcdfd48
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BubbleBoyNegative-export_4
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4795e5dfdb3414a0d82ba48b96403f9c
       vertices: []
       indices: 
       edges: []
@@ -161,7 +224,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 4a297992798694e17a6c67f0f2263eaa
+    spriteID: de43d86b32a2b424ea5cdaf5d2d536ab
     vertices: []
     indices: 
     edges: []
