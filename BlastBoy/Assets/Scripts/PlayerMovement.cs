@@ -30,7 +30,9 @@ public class PlayerMovement : MonoBehaviour
     public float jumpVel;
     public float maxJumpVel;
     int jumpCounter;
+    bool canBurst;
     bool burst;
+    public float burstVel;
 
     public Color defaultColor;
     public Color nightColor;
@@ -51,11 +53,21 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        //Initial Jump
         if (canJump)
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Z))
             {
                 jump = true;
+            }
+        }
+
+        //Burst Jump
+        if (!grounded && !canJump && canBurst)
+        {
+            if (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown(KeyCode.Z))
+            {
+                burst = true;
             }
         }
 
@@ -138,6 +150,13 @@ public class PlayerMovement : MonoBehaviour
             jumpVel = maxJumpVel;
         }
 
+        if (burst)
+        {
+            vel.y = burstVel;
+            burst = false;
+            canBurst = false;
+        }
+
         rb.MovePosition((Vector2)transform.position + vel * Time.deltaTime);
     }
 
@@ -154,6 +173,7 @@ public class PlayerMovement : MonoBehaviour
             canJump = true;
             jumpCounter = 0;
             jumpVel = baseJumpVel;
+            canBurst = true;
         }
         else
         {
