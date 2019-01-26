@@ -24,6 +24,16 @@ public class PlayerMovement : MonoBehaviour
     bool lastL;
 
     public float gravity;
+    bool canJump;
+    bool jump;
+    public float baseJumpVel;
+    public float jumpVel;
+    public float maxJumpVel;
+    int jumpCounter;
+    bool burst;
+
+    public Color defaultColor;
+    public Color nightColor;
 
     // Start is called before the first frame update
     void Start()
@@ -36,13 +46,33 @@ public class PlayerMovement : MonoBehaviour
         lastR = true;
         lastL = false;
         inactive = true;
+        
     }
 
-    // Update is called once per frame
+    void Update()
+    {
+        if (canJump)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Z))
+            {
+                jump = true;
+            }
+        }
+
+        //When you let go of the jump buttons, make jump false and fall
+        if ((Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Z)))
+        {
+            jump = false;
+            jumpCounter = 0;
+        }
+    }
+
+
     void FixedUpdate()
     {
         Grounded();
 
+        //Movement Code
         bool right = Input.GetKey(KeyCode.RightArrow);
         bool left = Input.GetKey(KeyCode.LeftArrow); 
 
@@ -72,8 +102,43 @@ public class PlayerMovement : MonoBehaviour
 
         vel.x = Mathf.Max(Mathf.Min(vel.x, maxAccel), -maxAccel);
 
-        rb.MovePosition((Vector2)transform.position + vel * Time.deltaTime);
+        //Jump and check if the button is still being held to vary jumps
+        if (jump)
+        {
+            if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Z)))
+            {
+                switch (jumpCounter)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        jumpVel += 1;
+                        break;
+                    case 2:
 
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        jumpVel += 3;
+                        break;
+                    case 6:
+                        jump = false;
+                        break;
+                }
+                jumpCounter++;
+            }
+            vel.y = jumpVel;
+        }
+
+        if (jumpVel > maxJumpVel)
+        {
+            jumpVel = maxJumpVel;
+        }
+
+        rb.MovePosition((Vector2)transform.position + vel * Time.deltaTime);
     }
 
     void Grounded()
@@ -86,11 +151,14 @@ public class PlayerMovement : MonoBehaviour
         if (grounded)
         {
             vel.y = 0;
+            canJump = true;
+            jumpCounter = 0;
+            jumpVel = baseJumpVel;
         }
         else
         {
            vel.y += gravity;
-           
+            canJump = false;
         }
     }
 }
