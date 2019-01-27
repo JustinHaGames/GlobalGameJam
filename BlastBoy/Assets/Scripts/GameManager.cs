@@ -54,6 +54,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
+
         //Dialogue
         if (discoverJump)
         {
@@ -267,6 +272,19 @@ public class GameManager : MonoBehaviour
                     goddessText.text = "";
                     blastOff = true;
                     break;
+            }
+        }
+
+        if (sceneID == 8)
+        {
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player.transform.position.x <= -6f)
+            {
+                blastOffTimer += 1 * Time.deltaTime;
+                if (blastOffTimer >= 3f)
+                {
+                    SceneManager.LoadScene(sceneID += 1);
+                }
             }
         }
 

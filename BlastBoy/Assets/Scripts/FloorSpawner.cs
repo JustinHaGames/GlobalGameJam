@@ -35,7 +35,7 @@ public class FloorSpawner : MonoBehaviour
             }
         }
 
-        if (randomNum >= .6f && transform.position.x != 0f)
+        if (randomNum >= .55f && transform.position.x != 0f)
         {
             if (!obstacleSpawned)
             {

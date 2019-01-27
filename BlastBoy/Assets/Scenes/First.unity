@@ -1007,7 +1007,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: 067dc74dcc1b74842937984b53428cc2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 067dc74dcc1b74842937984b53428cc2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1116,7 +1116,7 @@ PrefabInstance:
     - target: {fileID: 2986564537644836747, guid: c698258c52a9c4036941c61f24965411,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.05
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 2986564537644836747, guid: c698258c52a9c4036941c61f24965411,
         type: 3}
@@ -1242,5 +1242,10 @@ PrefabInstance:
       propertyPath: playerText
       value: 
       objectReference: {fileID: 1855124989}
+    - target: {fileID: 3923841244765199937, guid: c64e435f09a7742abb0120d3b6d94a24,
+        type: 3}
+      propertyPath: sceneID
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c64e435f09a7742abb0120d3b6d94a24, type: 3}
