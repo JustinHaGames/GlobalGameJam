@@ -45,15 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f226b9d10d944437f9643649018888dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneID: 0
+  sceneID: 6
   blastOff: 0
   discoverJump: 0
   discoverBurst: 0
   playerText: {fileID: 0}
+  goddessText: {fileID: 0}
   blastOffSound: {fileID: 8300000, guid: e75e0a232d6744125af42288466f4431, type: 3}
   inactive: 0
   tornadoActive: 0
   Tornado: {fileID: 877130229942365989, guid: 23e12eab51ddd46f08c05837b99f8980, type: 3}
+  reloadScene: 0
 --- !u!82 &8337100130894268499
 AudioSource:
   m_ObjectHideFlags: 0

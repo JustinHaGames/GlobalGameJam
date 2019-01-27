@@ -30,7 +30,7 @@ public class FloorSpawner : MonoBehaviour
         {
             if (!spawned)
             {
-                Instantiate(floor, new Vector3(transform.position.x + 16f, transform.position.y, transform.position.z), Quaternion.identity);
+                Instantiate(floor, new Vector3(transform.position.x + 15.95f, transform.position.y, transform.position.z), Quaternion.identity);
                 spawned = true;
             }
         }

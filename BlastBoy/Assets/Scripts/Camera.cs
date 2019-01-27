@@ -42,5 +42,22 @@ public class Camera : MonoBehaviour
                 transform.position = new Vector3(0, transform.position.y, transform.position.z);
             }
         }
+
+        if (GameManager.instance.sceneID == 8)
+        {
+
+            transform.position = new Vector3(player.position.x, transform.position.y, transform.position.z);
+
+            if (transform.position.x <= 0f)
+            {
+                transform.position = new Vector3(0, transform.position.y, transform.position.z);
+            }
+
+            if (transform.position.x >= 5f)
+            {
+                transform.position = new Vector3(5, transform.position.y, transform.position.z);
+            }
+
+        }
     }
 }

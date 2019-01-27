@@ -26,4 +26,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BlastOff 2.unity
     guid: 3b7216c07ca5741cdad0943146cec34d
+  - enabled: 1
+    path: Assets/Scenes/Fourth.unity
+    guid: b911aa63ef3bd463d8f2069f6dd52f3d
+  - enabled: 1
+    path: Assets/Scenes/BlastOff 3.unity
+    guid: 9a7fdc489c9154ac7b5274a07f2d2d58
+  - enabled: 1
+    path: Assets/Scenes/First 1.unity
+    guid: 13a2258ed5349445cb6b2db10817271c
   m_configObjects: {}

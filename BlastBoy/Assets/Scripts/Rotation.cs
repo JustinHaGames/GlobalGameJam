@@ -16,6 +16,13 @@ public class Rotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(new Vector3(0, 0, -5f), Time.deltaTime * rotationIntensity);
+        if (GameManager.instance.sceneID != 7)
+        {
+            transform.Rotate(new Vector3(0, 0, -5f), Time.deltaTime * rotationIntensity);
+        }
+        else
+        {
+            transform.Rotate(new Vector3(0, 0, 5f), Time.deltaTime * rotationIntensity);
+        }
     }
 }

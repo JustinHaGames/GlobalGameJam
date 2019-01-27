@@ -17,6 +17,6 @@ public class PlayerTextHolder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(player.transform.position.x + 1f, player.transform.position.y + 1f, transform.position.z);
+        transform.position = new Vector3(player.transform.position.x + 1f, player.transform.position.y + 1.5f, transform.position.z);
     }
 }
