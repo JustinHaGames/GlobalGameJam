@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpVel;
     public float maxJumpVel;
     int jumpCounter;
+    int jumpTextCounter;
     bool canBurst;
     bool burst;
     public float burstVel;
@@ -43,9 +44,10 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject explosion;
 
-    bool discoverBurst;
     public AudioClip firstBurst;
     public AudioClip secondBurst;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -109,19 +111,28 @@ public class PlayerMovement : MonoBehaviour
     {
         Grounded();
 
+        if (GameManager.instance.inactive)
+        {
+            anim.Play("Idle");
+        }
+
+        if (!GameManager.instance.inactive) { 
         //Movement Code
         bool right = Input.GetKey(KeyCode.RightArrow);
-        bool left = Input.GetKey(KeyCode.LeftArrow); 
+        bool left = Input.GetKey(KeyCode.LeftArrow);
 
         if (right)
         {
             vel.x += accel;
             lastL = false;
-            lastR = true; 
-            sprite.flipX = false;
+            lastR = true;
             if (grounded)
             {
                 anim.Play("RunningAnimation");
+            }
+            if (!left)
+            {
+                sprite.flipX = false;
             }
         }
 
@@ -130,14 +141,24 @@ public class PlayerMovement : MonoBehaviour
             vel.x -= accel;
             lastL = true;
             lastR = false;
-            sprite.flipX = true;
             if (grounded)
             {
+
                 anim.Play("RunningAnimation");
+            }
+            if (!right)
+            {
+                sprite.flipX = true;
             }
         }
 
         if (!left && !right && grounded)
+        {
+            vel.x = 0;
+            anim.Play("Idle");
+        }
+
+        if (right && left)
         {
             vel.x = 0;
             anim.Play("Idle");
@@ -158,6 +179,7 @@ public class PlayerMovement : MonoBehaviour
                         {
                             audio.PlayOneShot(firstBurst, 1f);
                         }
+                        jumpTextCounter += 1;
                         Instantiate(explosion, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
                         break;
                     case 1:
@@ -203,11 +225,21 @@ public class PlayerMovement : MonoBehaviour
 
         if (GameManager.instance.sceneID == 0)
         {
+
+            if (jumpTextCounter == 1)
+            {
+                GameManager.instance.discoverJump = true;
+            }
+            else
+            {
+                GameManager.instance.discoverJump = false;
+            }
+
             if (burstCounter == 0)
             {
                 if (vel.y < 0)
                 {
-                    Time.timeScale = .5f;
+                    Time.timeScale = .25f;
                 }
             }
             else
@@ -215,6 +247,14 @@ public class PlayerMovement : MonoBehaviour
                 Time.timeScale = 1f;
             }
             if (burstCounter >= 3)
+            {
+                superBurst = true;
+            }
+        }
+
+        if (GameManager.instance.sceneID == 2)
+        {
+            if (burstCounter >= 7f)
             {
                 superBurst = true;
             }
@@ -229,7 +269,14 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (flashingTimer > .5f && flashingTimer < 1f)
             {
-                sprite.color = nightColor;
+                if (GameManager.instance.sceneID == 0)
+                {
+                    sprite.color = nightColor;
+                }
+                else
+                {
+                    sprite.color = defaultColor;
+                }
             }
             else if (flashingTimer >= 1f)
             {
@@ -250,6 +297,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb.MovePosition((Vector2)transform.position + vel * Time.deltaTime);
     }
+    }
 
     void Grounded()
     {
@@ -268,8 +316,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-           vel.y += gravity;
-            canJump = false;
+            if (!GameManager.instance.inactive)
+            {
+                vel.y += gravity;
+                canJump = false;
+            }
         }
     }
 }

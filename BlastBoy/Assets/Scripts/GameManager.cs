@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,9 +14,23 @@ public class GameManager : MonoBehaviour
     public bool blastOff;
     float blastOffTimer;
 
+    public bool discoverJump;
+    public bool discoverBurst;
+
+    public Text playerText;
+
     AudioSource audio;
 
     public AudioClip blastOffSound;
+
+    public bool inactive;
+
+    int dialogueCount;
+
+    //Typewriter effect
+    public float textDelay;
+    public string fullText;
+    public string currentText;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +45,44 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        if (sceneID == 1)
+        //Dialogue
+        if (discoverJump)
+        {
+            playerText.text = "?";
+        }
+        else if (!discoverJump)
+        {
+            playerText.text = "";
+        }
+
+        if (sceneID == 2)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Z))
+            {
+                dialogueCount += 1;
+            }
+
+            switch (dialogueCount)
+            {
+                case 0:
+                    inactive = true;
+                    break;
+                case 1:
+                    playerText.text = "Hello?";
+                    break;
+                case 2:
+                    playerText.text = "Can you tell me where I am?";
+                    break;
+                case 3:
+                    playerText.text = "Ummmm.... Hello?";
+                    break;
+                case 4:
+                    inactive = false;
+                    break;
+            }
+        }
+
+        if (sceneID == 1 || sceneID == 3)
         {
             blastOff = true;
         }
@@ -52,4 +104,15 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
+    IEnumerator ShowText()
+    {
+        for (int i = 0; i < fullText.Length; i++)
+        {
+            currentText = fullText.Substring(0, i);
+            this.GetComponent<Text>().text = currentText;
+            yield return new WaitForSeconds(textDelay);
+        }
+    }
+
 }

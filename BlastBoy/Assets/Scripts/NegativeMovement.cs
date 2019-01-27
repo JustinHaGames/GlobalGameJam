@@ -77,90 +77,111 @@ public class NegativeMovement : MonoBehaviour
     {
         Grounded();
 
-        //Movement Code
-        bool left = Input.GetKey(KeyCode.RightArrow);
-        bool right = Input.GetKey(KeyCode.LeftArrow);
-
-        if (right)
+        if (GameManager.instance.inactive)
         {
-            vel.x += accel;
-            lastL = false;
-            lastR = true;
-            sprite.flipX = false;
-            if (grounded)
-            {
-                anim.Play("NegativeRunAnimation");
-            }
-        }
-
-        if (left)
-        {
-            vel.x -= accel;
-            lastL = true;
-            lastR = false;
-            sprite.flipX = true;
-            if (grounded)
-            {
-                anim.Play("NegativeRunAnimation");
-            }
-        }
-
-        if (!left && !right && grounded)
-        {
-            vel.x = 0;
             anim.Play("NegativeIdle");
         }
 
-        vel.x = Mathf.Max(Mathf.Min(vel.x, maxAccel), -maxAccel);
 
-        //Jump and check if the button is still being held to vary jumps
-        if (jump)
+        if (!GameManager.instance.inactive && !GameManager.instance.blastOff)
         {
-            if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Z)))
+            //Movement Code
+            bool left = Input.GetKey(KeyCode.RightArrow);
+            bool right = Input.GetKey(KeyCode.LeftArrow);
+
+            if (right)
             {
-                switch (jumpCounter)
+                vel.x += accel;
+                lastL = false;
+                lastR = true;
+                if (grounded)
                 {
-                    case 0:
-                        anim.Play("NegativeJump");
-                        Instantiate(negativeExplosion, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
-                        break;
-                    case 1:
-                        jumpVel += 1;
-                        break;
-                    case 2:
-
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                    case 5:
-                        jumpVel += 3;
-                        break;
-                    case 6:
-                        jump = false;
-                        break;
+                    anim.Play("NegativeRunAnimation");
                 }
-                jumpCounter++;
+                if (!left)
+                {
+                    sprite.flipX = false;
+                }
             }
-            vel.y = jumpVel;
-        }
 
-        if (jumpVel > maxJumpVel)
-        {
-            jumpVel = maxJumpVel;
-        }
+            if (left)
+            {
+                vel.x -= accel;
+                lastL = true;
+                lastR = false;
+                if (grounded)
+                {
+                    anim.Play("NegativeRunAnimation");
+                }
+                if (!right)
+                {
+                    sprite.flipX = true;
+                }
+            }
 
-        if (burst)
-        {
-            vel.y = burstVel;
-            anim.Play("NegativeJump");
-            Instantiate(negativeExplosion, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
-            burst = false;
-            canBurst = false;
-        }
+            if (!left && !right && grounded)
+            {
+                vel.x = 0;
+                anim.Play("NegativeIdle");
+            }
 
-        rb.MovePosition((Vector2)transform.position + vel * Time.deltaTime);
+            if (right && left)
+            {
+                vel.x = 0;
+                anim.Play("NegativeIdle");
+            }
+
+            vel.x = Mathf.Max(Mathf.Min(vel.x, maxAccel), -maxAccel);
+
+            //Jump and check if the button is still being held to vary jumps
+            if (jump)
+            {
+                if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Z)))
+                {
+                    switch (jumpCounter)
+                    {
+                        case 0:
+                            anim.Play("NegativeJump");
+                            Instantiate(negativeExplosion, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
+                            break;
+                        case 1:
+                            jumpVel += 1;
+                            break;
+                        case 2:
+
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            jumpVel += 3;
+                            break;
+                        case 6:
+                            jump = false;
+                            break;
+                    }
+                    jumpCounter++;
+                }
+                vel.y = jumpVel;
+            }
+
+            if (jumpVel > maxJumpVel)
+            {
+                jumpVel = maxJumpVel;
+            }
+
+            if (burst)
+            {
+                vel.y = burstVel;
+                anim.Play("NegativeJump");
+                Instantiate(negativeExplosion, new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z), Quaternion.identity);
+                burst = false;
+                canBurst = false;
+            }
+
+            rb.MovePosition((Vector2)transform.position + vel * Time.deltaTime);
+        }
     }
 
         void Grounded()
@@ -180,8 +201,11 @@ public class NegativeMovement : MonoBehaviour
             }
             else
             {
+            if (!GameManager.instance.inactive)
+            {
                 vel.y += gravity;
                 canJump = false;
+            }
             }
         }
 }
