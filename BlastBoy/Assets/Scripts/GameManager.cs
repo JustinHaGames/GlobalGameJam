@@ -27,11 +27,6 @@ public class GameManager : MonoBehaviour
 
     int dialogueCount;
 
-    //Typewriter effect
-    public float textDelay;
-    public string fullText;
-    public string currentText;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -103,16 +98,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-    }
-
-    IEnumerator ShowText()
-    {
-        for (int i = 0; i < fullText.Length; i++)
-        {
-            currentText = fullText.Substring(0, i);
-            this.GetComponent<Text>().text = currentText;
-            yield return new WaitForSeconds(textDelay);
-        }
     }
 
 }
