@@ -76,6 +76,11 @@ public class PlayerMovement : MonoBehaviour
             sprite.color = defaultColor;
         }
 
+        if (GameManager.instance.sceneID == 4)
+        {
+            sprite.color = nightColor;
+        }
+
     }
 
     void Update()
@@ -121,7 +126,13 @@ public class PlayerMovement : MonoBehaviour
         bool right = Input.GetKey(KeyCode.RightArrow);
         bool left = Input.GetKey(KeyCode.LeftArrow);
 
-        if (right)
+            if (GameManager.instance.sceneID == 4)
+            {
+                left = false;
+                right = true;
+            }
+
+            if (right)
         {
             vel.x += accel;
             lastL = false;
@@ -260,7 +271,15 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (superBurst)
+        if (GameManager.instance.sceneID == 4)
+            {
+                if (burstCounter >= 20f || jumpTextCounter >= 30)
+                {
+                    superBurst = true;
+                }
+            }
+
+            if (superBurst)
         {
             flashingTimer += 1 * Time.deltaTime;
             if (flashingTimer <= .5f)
@@ -323,4 +342,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Tornado")
+        {
+            GameManager.instance.reloadScene = true;
+        }
+    }
+
 }

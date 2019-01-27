@@ -47,7 +47,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneID: 0
   blastOff: 0
+  discoverJump: 0
+  discoverBurst: 0
+  playerText: {fileID: 0}
   blastOffSound: {fileID: 8300000, guid: e75e0a232d6744125af42288466f4431, type: 3}
+  inactive: 0
+  tornadoActive: 0
+  Tornado: {fileID: 877130229942365989, guid: 23e12eab51ddd46f08c05837b99f8980, type: 3}
 --- !u!82 &8337100130894268499
 AudioSource:
   m_ObjectHideFlags: 0

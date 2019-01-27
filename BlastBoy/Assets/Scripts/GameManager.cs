@@ -27,6 +27,13 @@ public class GameManager : MonoBehaviour
 
     int dialogueCount;
 
+   public bool tornadoActive;
+    bool tornadoSpawned;
+
+    public GameObject Tornado;
+
+    public bool reloadScene;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +41,7 @@ public class GameManager : MonoBehaviour
         instance = this;
 
         audio = GetComponent<AudioSource>();
+        dialogueCount = 0;
     }
 
     // Update is called once per frame
@@ -77,7 +85,45 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (sceneID == 1 || sceneID == 3)
+        if (sceneID == 4)
+        {
+
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Z))
+            {
+                dialogueCount += 1;
+            }
+
+            switch (dialogueCount)
+            {
+                case 0:
+                    inactive = true;
+                    break;
+                case 1:
+                    playerText.text = "Where am I now?";
+                    break;
+                case 2:
+                    playerText.text = "I can't see anything.";
+                    break;
+                case 3:
+                    playerText.text = "Wait, what's that noise?";
+                    if (!tornadoSpawned)
+                    {
+                        Instantiate(Tornado, new Vector3(-5f, 2.5f, 0f), Quaternion.Euler(0,0,190));
+                        tornadoSpawned = true;
+                    }
+                    break;
+                case 4:
+                    playerText.text = "Oh no...";
+                    break;
+                case 5:
+                    playerText.text = "";
+                    inactive = false;
+                    tornadoActive = true;
+                    break;
+            }
+        }
+
+        if (sceneID == 1 || sceneID == 3 || sceneID == 5)
         {
             blastOff = true;
         }
@@ -96,6 +142,11 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(sceneID += 1);
                 blastOff = false;
             }
+        }
+
+        if (reloadScene)
+        {
+            SceneManager.LoadScene(sceneID);
         }
 
     }

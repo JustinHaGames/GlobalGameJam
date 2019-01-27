@@ -77,7 +77,7 @@ public class NegativeMovement : MonoBehaviour
     {
         Grounded();
 
-        if (GameManager.instance.inactive)
+        if (GameManager.instance.inactive || GameManager.instance.blastOff)
         {
             anim.Play("NegativeIdle");
         }
